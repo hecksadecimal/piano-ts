@@ -14,7 +14,7 @@
     "ss13",
     "midi"
   ],
-  "author": "Hex",
+  "author": "0xeff",
   "license": "AGPL-3.0",
   "dependencies": {
     "midi-file": "^1.2.4"
