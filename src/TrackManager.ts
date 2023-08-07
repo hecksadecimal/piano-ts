@@ -6,7 +6,7 @@ const PERCUSSIVE_PROGRAMS = [112, 113, 114, 115, 116, 117, 118]
 const SOUND_EFFECT_PROGRAMS = [119, 120, 121, 122, 123, 124, 125, 126, 127]
 const DEFAULT_IGNORED_PROGRAMS = [...PERCUSSIVE_PROGRAMS, ...SOUND_EFFECT_PROGRAMS]
 
-export class Track {
+class Track {
     title: string = ""
     instruments: Set<number> = new Set()
     instrumentStrings: Set<string> = new Set()
@@ -35,15 +35,14 @@ export class Track {
     }
 }
 
-export default class Converter {
-    midiBuffer: Buffer | undefined
-    midiObject: MidiData | undefined
-    modifiedMidiObject: MidiData | undefined
+export default class TrackManager {
+    midiBuffer?: Buffer
+    midiObject?: MidiData
+    modifiedMidiObject?: MidiData
 
     lineLimit: number
     lineLengthLimit: number
     tickLag: number
-    overallImportLimit: number
     endOfLine: string
 
     octaveTranspose: number
@@ -51,7 +50,6 @@ export default class Converter {
 
     octaveKeys: number
     highestOctave: number
-    timeQuanta: number
 
     identifiedTracks: Track[]
 
@@ -77,21 +75,19 @@ export default class Converter {
         this.lineLimit = linesLimit
         this.lineLengthLimit = lineLengthLim
         this.tickLag = tickLag
-        this.overallImportLimit = lineLengthLim * linesLimit * 2
         this.endOfLine = endOfLineChar
         this.octaveTranspose = octaveTranspose
         this.floatPrecision = floatPrecision
         this.octaveKeys = octaveKeys
         this.highestOctave = highestOctave
-        this.timeQuanta = tickLag * 100
         
         this.identifiedTracks = new Array<Track>()
     }
 
     setMidi(midi: Buffer) {
+        this.resetMidi()
         this.identifiedTracks = new Array<Track>()
         this.midiBuffer = midi
-        this.modifiedMidiObject = undefined
         this.process()
     }
 
