@@ -15,13 +15,10 @@
     "midi"
   ],
   "author": "Hex",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "dependencies": {
     "midi-file": "^1.2.4",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
-  },
-  "devDependencies": {
-    "@tsconfig/node-lts-strictest-esm": "^18.12.1"
   }
 }

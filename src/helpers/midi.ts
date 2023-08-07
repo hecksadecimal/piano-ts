@@ -1,3 +1,6 @@
+// Adapted from https://github.com/jazz-soft/JZZ-midi-GM
+// LICENSE: MIT
+
 const GROUPS = ['Piano', 'Chromatic Percussion', 'Organ', 'Guitar', 'Bass', 'Strings', 'Ensemble', 'Brass', 'Reed', 'Pipe', 'Synth Lead', 'Synth Pad', 'Synth Effects', 'Ethnic', 'Percussive', 'Sound Effects']
 const INSTRUMENTS = [
 'Acoustic Grand Piano', 'Bright Acoustic Piano', 'Electric Grand Piano', 'Honky-tonk Piano', 'Electric Piano 1', 'Electric Piano 2', 'Harpsichord', 'Clavinet', 
@@ -432,11 +435,6 @@ const XG126 = {
 }
 const XG127 = {
 0:"Standard Drum Kit",1:"Standard Drum Kit 2",2:"Dry Drum Kit",3:"Bright Drum Kit",4:"Skim Drum Kit",5:"Slim Drum Kit",6:"Rogue Drum Kit",7:"Hob Drum Kit",8:"Room Drum Kit",9:"Dark Room Drum Kit",16:"Rock Drum Kit",17:"Rock Drum Kit 2",24:"Electro Drum Kit",25:"Analog Drum Kit",26:"Analog Drum Kit 2",27:"Dance Drum Kit",28:"Hip Hop Drum Kit",29:"Jungle Drum Kit",30:"Apogee Drum Kit",31:"Perigee Drum Kit",32:"Jazz Drum Kit",33:"Jazz Drum Kit 2",40:"Brush Drum Kit",41:"Brush Drum Kit 2",48:"Symphony Drum Kit",56:"Natural Drum Kit",57:"Natural Funk Drum Kit",64:"Tramp Drum Kit",65:"Amber Drum Kit",66:"Coffin Drum Kit",80:"Live! Standard Drum Kit",81:"Live! Funk Drum Kit",82:"Live! Brush Drum Kit",83:"Live! Standard + Percussion Kit",84:"Live! Funk + Percussion Kit",85:"Live! Brush + Percussion Kit"
-}
-
-function strip(str: string) {
-    if (typeof str == 'undefined') str = ''
-    return ' ' + str.toString().toLowerCase().replace(/\W+/g, ' ').trim() + ' '
 }
 
 export function programName(program: number, msb?: number, lsb?: number) {

@@ -1,6 +1,6 @@
 import { parseMidi, MidiData } from "midi-file"
 import { programName, programGroup } from "./helpers/midi"
-import { PianoConverter } from "./Piano"
+import { PianoConverter } from "./PianoConverter"
 
 const PERCUSSIVE_PROGRAMS = [112, 113, 114, 115, 116, 117, 118]
 const SOUND_EFFECT_PROGRAMS = [119, 120, 121, 122, 123, 124, 125, 126, 127]
@@ -19,7 +19,7 @@ class Track {
 
     // Things that will effect the end results of conversion
     disabled: boolean = false
-    transpose: number = 0
+    transpose: number = 0 //TODO
 
     toString() {
         var instrumentStringsArray = Array.from(this.instrumentStrings)
