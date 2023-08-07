@@ -1,10 +1,6 @@
 import {
     MidiData,
     MidiEvent,
-    MidiNoteOffEvent,
-    MidiNoteOnEvent,
-    MidiMetaEvent,
-    MidiEndOfTrackEvent,
     MidiChannelEvent,
     MidiNoteMixins,
     MidiHeader,
@@ -287,7 +283,7 @@ export class PianoConverter {
     ];
   }
 
-  dur2mod(dur: number, bpm_mod: number = 1.0): string {
+  private durToMod(dur: number, bpm_mod: number = 1.0): string {
     const mod = bpm_mod / dur;
     const roundedMod = mod.toFixed(this.floatPrecision);
     return roundedMod.replace(/0+$/, '').replace(/\.$/, '');
@@ -405,7 +401,7 @@ export class PianoConverter {
   
       if (event[1] !== mostFrequentDur) {
         sheetMusic += "/";
-        sheetMusic += this.dur2mod(event[1], mostFrequentDur);
+        sheetMusic += this.durToMod(event[1], mostFrequentDur);
       }
   
       sheetMusic += ",";
@@ -458,10 +454,14 @@ export class PianoConverter {
     var filteredScore = this.filterEmptyTracks(score);
     score = this.mergeEvents(filteredScore);
     score = this.sortScoreByEventTimes(score);
-    const timePerTicks = this.convertIntoSecondsPerTicks(score);
-    const roundedScore = this.performRoundation(timePerTicks);
+    score = this.convertIntoSecondsPerTicks(score);
+
+    // Stops being a real 'Score' object here, now we're just working with arrays of numbers.
+    const roundedScore = this.performRoundation(score);
     const mostFrequentDur = this.obtainCommonDuration(roundedScore);
     const reducedScore = this.reduceScoreToChords(roundedScore);
+
+    // Strings and arrays of strings from here on out.
     const sheetMusic = this.obtainSheetMusic(reducedScore, mostFrequentDur);
     const splitMusic = this.explodeSheetMusic(sheetMusic);
 
