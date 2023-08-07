@@ -7,9 +7,6 @@
   "files": [
     "/dist"
   ],
-  "scripts": {
-    "test": "test"
-  },
   "keywords": [
     "ss13",
     "midi"
