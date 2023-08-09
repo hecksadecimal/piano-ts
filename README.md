@@ -1,3 +1,8 @@
+# Installation
+```bash
+npm i piano-ts
+```
+
 # Usage
 
 ```ts
