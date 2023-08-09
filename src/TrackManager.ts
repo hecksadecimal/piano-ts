@@ -35,7 +35,7 @@ class Track {
     }
 }
 
-export default class TrackManager {
+export class TrackManager {
     midiBuffer?: Buffer
     midiObject?: MidiData
     modifiedMidiObject?: MidiData

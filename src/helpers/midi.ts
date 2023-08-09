@@ -1,8 +1,8 @@
 // Adapted from https://github.com/jazz-soft/JZZ-midi-GM
 // LICENSE: MIT
 
-const GROUPS = ['Piano', 'Chromatic Percussion', 'Organ', 'Guitar', 'Bass', 'Strings', 'Ensemble', 'Brass', 'Reed', 'Pipe', 'Synth Lead', 'Synth Pad', 'Synth Effects', 'Ethnic', 'Percussive', 'Sound Effects']
-const INSTRUMENTS = [
+const GROUPS: string[] = ['Piano', 'Chromatic Percussion', 'Organ', 'Guitar', 'Bass', 'Strings', 'Ensemble', 'Brass', 'Reed', 'Pipe', 'Synth Lead', 'Synth Pad', 'Synth Effects', 'Ethnic', 'Percussive', 'Sound Effects']
+const INSTRUMENTS: string[] = [
 'Acoustic Grand Piano', 'Bright Acoustic Piano', 'Electric Grand Piano', 'Honky-tonk Piano', 'Electric Piano 1', 'Electric Piano 2', 'Harpsichord', 'Clavinet', 
 'Celesta', 'Glockenspiel', 'Music Box', 'Vibraphone', 'Marimba', 'Xylophone', 'Tubular Bells', 'Dulcimer', 
 'Drawbar Organ', 'Percussive Organ', 'Rock Organ', 'Church Organ', 'Reed Organ', 'Accordion', 'Harmonica', 'Tango Accordion', 
@@ -20,7 +20,7 @@ const INSTRUMENTS = [
 'Tinkle Bell', 'Agogo', 'Steel Drums', 'Woodblock', 'Taiko Drum', 'Melodic Tom', 'Synth Drum', 'Reverse Cymbal', 
 'Guitar Fret Noise', 'Breath Noise', 'Seashore', 'Bird Tweet', 'Telephone Ring', 'Helicopter', 'Applause', 'Gunshot'
 ]
-const PERCUSSIVES = [
+const PERCUSSIVES: string[] = [
 'High-Q', 'Slap', 'Scratch Push', 'Scratch Pull', 'Sticks', 'Square Click', 'Metronome Click', 'Metronome Bell', 
 'Acoustic Bass Drum', 'Bass Drum 1', 'Side Stick', 'Acoustic Snare', 'Hand Clap', 'Electric Snare', 'Low Floor Tom', 'Closed Hi Hat', 
 'High Floor Tom', 'Pedal Hi-Hat', 'Low Tom', 'Open Hi-Hat', 'Low-Mid Tom', 'Hi-Mid Tom', 'Crash Cymbal 1', 'High Tom', 
@@ -30,11 +30,11 @@ const PERCUSSIVES = [
 'Claves', 'Hi Wood Block', 'Low Wood Block', 'Mute Cuica', 'Open Cuica', 'Mute Triangle', 'Open Triangle', 'Shaker', 
 'Jingle Bell', 'Bell Tree', 'Castanets', 'Mute Surdo', 'Open Surdo'
 ]
-const MORE = {
+const MORE: { [key: string]: number } = {
 'Hammond': 17, 'Keyboard': 18, 'Uke': 24, 'Ukulele': 24, 'Fuzz': 30, 'Sax': 66, 'Saxophone': 66,
 'Soprano Saxophone': 64, 'Alto Saxophone': 65, 'Tenor Saxophone': 66, 'Baritone Saxophone': 67
 }
-const GS = [
+const GS: { [key: number]: string }[] = [
 {0:"Piano 1",1:"Upright Piano",2:"Mild Piano",8:"Upright Piano Wide",9:"Mild Piano Wide",16:"European Pianoforte",24:"Piano + Strings",25:"Piano + Strings 2",26:"Piano + Choir 1",27:"Piano + Choir 2"},
 {0:"Piano 2",1:"Pop Piano",2:"Rock Piano",8:"Pop Piano Wide",9:"Rock Piano Wide",16:"Dance Piano"},
 {0:"Piano 3",1:"Electric Grand Piano + Rhodes 1",2:"Electric Grand Piano + Rhodes 2",8:"Piano 3 Wide"},
@@ -164,7 +164,7 @@ const GS = [
 {0:"Applause",1:"Laughing",2:"Screaming",3:"Punch",4:"Heart Beat",5:"Footsteps",6:"Applause 2",7:"Small Club",8:"Applause Wave",9:"Baby Laughing",16:"Voice One",17:"Voice Two",18:"Voice Three",19:"Voice Tah",20:"Voice Whey",22:"Voice Kikit",23:"Voice ComeOn",24:"Voice Aou",25:"Voice Oou",26:"Voice Hie"},
 {0:"Gun Shot",1:"Machine Gun",2:"Lasergun",3:"Explosion",4:"Eruption",5:"Big Shot",6:"Explosion 2"}
 ]
-const GM2 = [
+const GM2: { [key: number]: string }[] = [
 {0:"Acoustic Grand Piano",1:"Acoustic Grand Piano (wide)",2:"Acoustic Grand Piano (dark)"},
 {0:"Bright Acoustic Piano",1:"Bright Acoustic Piano (wide)"},
 {0:"Electric Grand Piano",1:"Electric Grand Piano (wide)"},
@@ -294,7 +294,8 @@ const GM2 = [
 {0:"Applause",1:"Laughing",2:"Screaming",3:"Punch",4:"Heart Beat",5:"Footsteps"},
 {0:"Gunshot",1:"Machine Gun",2:"Lasergun",3:"Explosion"}
 ]
-const XG = [
+
+const XG: { [key: number]: string }[] = [
 {0:"Grand Piano",1:"Grand Piano KSP",2:"Grand Piano Dark",18:"Mellow Grand Piano",40:"Piano Strings",41:"Dream Piano",64:"Concert Grand Piano",65:"Concert Grand Piano KSP",66:"Double Concert Grand",67:"MIDI Grand Piano 1",68:"MIDI Grand Piano 2",69:"Oldest Acoustic Piano"},
 {0:"Bright Piano",1:"Bright Piano KSP",3:"Stereo Bright Piano",20:"Resonant Bright Piano",32:"Detuned Bright Piano",40:"Synth Pad Piano",64:"Bright Concert Grand",65:"Bright Concert Grand KSP",66:"MIDI Grand Piano 3",67:"MIDI Grand Piano 4",68:"Old Piano"},
 {0:"Electric Grand Piano",1:"Electric Grand Piano KSP",32:"Detuned CP80",35:"Synth CP",40:"Layered CP 1",41:"Layered CP 2"},
@@ -424,59 +425,61 @@ const XG = [
 {0:"Applause"},
 {0:"Gunshot"}
 ]
-const GM2DR = {
+const GM2DR: { [key: number]: string } = {
 0:"Standard Drum Kit",8:"Room Drum Kit",16:"Power Drum Kit",24:"Electro Drum Kit",25:"Analog Drum Kit",32:"Jazz Drum Kit",40:"Brush Drum Kit",48:"Orchestra Drum Kit",56:"SFX Kit"
 }
-const XG64 = {
+const XG64: { [key: number]: string } = {
 0:"Cutting Noise",1:"Cutting Noise 2",2:"Distorted Cutting Noise",3:"String Slap",4:"Bass Slide",5:"Pick Scrape",16:"Flute Key Click",32:"Shower",33:"Thunder",34:"Wind",35:"Stream",36:"Bubble",37:"Feed",38:"Cave",48:"Dog",49:"Horse",50:"Bird Tweet 2",51:"Kitty",52:"Growl",53:"Haunted",54:"Ghost",55:"Maou",56:"Insects",57:"Bacteria",64:"Phone Call",65:"Door Squeak",66:"Door Slam",67:"Scratch Cut",68:"Scratch Split",69:"Wind Chime",70:"Telephone Ring 2",71:"Another Scratch",72:"Turn Table",80:"Car Engine Ignition",81:"Car Tires Squeal",82:"Car Passing",83:"Car Crash",84:"Siren",85:"Train",86:"Jet Plane",87:"Starship",88:"Burst",89:"Roller Coaster",90:"Submarine",91:"Connectivity",92:"Mystery",93:"Charging",96:"Laugh",97:"Scream",98:"Punch",99:"Heartbeat",100:"Footsteps",101:"Applause 2",112:"Machine Gun",113:"Laser Gun",114:"Explosion",115:"Firework",116:"Fireball"
 }
-const XG126 = {
+const XG126: { [key: number]: string } = {
 0:"SFX Kit 1",1:"SFX Kit 2",16:"Techno SFX Kit K/S",17:"Techno SFX Kit Hi",18:"Techno SFX Kit Lo",32:"Sakura SFX Kit",33:"Small Latin SFX Kit",34:"China SFX Kit",35:"Arabic Kit",40:"Live! AfroCuban SFX Kit",41:"Live! AfroCuban SFX Kit 2",42:"Live! Brazilian SFX Kit",43:"Live! PopLatin SFX Kit"
 }
-const XG127 = {
+const XG127: { [key: number]: string } = {
 0:"Standard Drum Kit",1:"Standard Drum Kit 2",2:"Dry Drum Kit",3:"Bright Drum Kit",4:"Skim Drum Kit",5:"Slim Drum Kit",6:"Rogue Drum Kit",7:"Hob Drum Kit",8:"Room Drum Kit",9:"Dark Room Drum Kit",16:"Rock Drum Kit",17:"Rock Drum Kit 2",24:"Electro Drum Kit",25:"Analog Drum Kit",26:"Analog Drum Kit 2",27:"Dance Drum Kit",28:"Hip Hop Drum Kit",29:"Jungle Drum Kit",30:"Apogee Drum Kit",31:"Perigee Drum Kit",32:"Jazz Drum Kit",33:"Jazz Drum Kit 2",40:"Brush Drum Kit",41:"Brush Drum Kit 2",48:"Symphony Drum Kit",56:"Natural Drum Kit",57:"Natural Funk Drum Kit",64:"Tramp Drum Kit",65:"Amber Drum Kit",66:"Coffin Drum Kit",80:"Live! Standard Drum Kit",81:"Live! Funk Drum Kit",82:"Live! Brush Drum Kit",83:"Live! Standard + Percussion Kit",84:"Live! Funk + Percussion Kit",85:"Live! Brush + Percussion Kit"
 }
 
-export function programName(program: number, msb?: number, lsb?: number) {
-    var value: string;
+export function programName(program: number, msb?: number, lsb?: number): string {
+    var value: string = ""
     if (program >= 0 && program <= 127) {
-      if (!msb && !lsb) return INSTRUMENTS[program];
+      if (!msb && !lsb) 
+        value = INSTRUMENTS[program] ? INSTRUMENTS[program] : "";
       if (msb == 0 && lsb) {
         value = XG[program][lsb];
-        if (value) return value;
       }
       if (msb == 0x40 && !lsb) {
         value = XG64[program];
-        if (value) return value;
       }
-      if (msb == 0x79) {
+      if (msb == 0x79 && lsb) {
         value = GM2[program][lsb];
-        if (value) return value;
       }
       if (msb == 0x78) {
         if (!lsb) value = GM2DR[program];
-        return value || 'Drum Kit *';
+        value = value || 'Drum Kit *';
       }
       if (msb == 0x7e) {
         if (!lsb) value = XG126[program];
-        return value || 'SFX Kit *';
+        value = value || 'SFX Kit *';
       }
       if (msb == 0x7f) {
         if (!lsb) value = XG127[program];
-        return value || 'Drum Kit *';
+        value = value || 'Drum Kit *';
       }
-      if (!lsb) {
+      if (!lsb && msb) {
         value = GS[program][msb];
-        if (value) return value;
       }
-      return INSTRUMENTS[program] + ' *';
+      return (INSTRUMENTS[program] ? INSTRUMENTS[program] : "") + ' *';
     }
+    return value
   }
 
 export function percussionName(note: number) { 
-    if (note >= 27 && note <= 87) return PERCUSSIVES[note - 27]
+    if (note >= 27 && note <= 87) 
+      return PERCUSSIVES[note - 27] ? PERCUSSIVES[note - 27] : ""
+    return ""
 }
 
 export function programGroup(program: number) {
-    if (program >= 0 && program <= 127) return GROUPS[program >> 3]
+    if (program >= 0 && program <= 127) 
+      return GROUPS[program >> 3] ? GROUPS[program >> 3] : ""
+    return ""
 }

@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
-    "declaration": true,
-    "outDir": "./dist"
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "target": "ES3",
+    "ignoreDeprecations": "5.0",
+    "downlevelIteration": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

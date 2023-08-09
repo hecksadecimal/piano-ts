@@ -68,8 +68,8 @@ export class PianoConverter {
       this.octaveKeys = octaveKeys;
       this.highestOctave = highestOctave;
       this.endOfLineChar = endOfLineChar;
-      this.updateTimeQuanta();
-      this.updateOverallLinesLimit();
+      this.timeQuanta = 100 * this.tickLag
+      this.overallImportLimit = 2 * this.lineLengthLim * this.linesLimit;
     }
   
     private updateTimeQuanta(): void {
@@ -207,6 +207,7 @@ export class PianoConverter {
 
   private midi2opus(header: MidiHeader, tracks: MidiEvent[][]) {
     var opus: Opus = {tpq: 0, tracks: new Array()}
+    //@ts-expect-error
     opus.tpq = header.ticksPerFrame ? header.ticksPerFrame * header.ticksPerBeat : header.ticksPerBeat ? header.ticksPerBeat : 160
     // Loop through the tracks and convert each event to opus format
     for (const track of structuredClone(tracks)) { 
@@ -245,9 +246,9 @@ export class PianoConverter {
     octaves: number[]
   ): [string, boolean[], number[]] {
     const names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const convertTable = { 1: 0, 3: 1, 6: 2, 8: 3, 10: 4 };
-    const inclusionTable = { 0: 0, 2: 1, 5: 2, 7: 3, 9: 4 };
-    const correspondenceTable = { 0: 1, 1: 0, 2: 3, 3: 2, 5: 6, 6: 5, 7: 8, 8: 7, 9: 10, 10: 9 };
+    const convertTable: { [key: number]: number } = { 1: 0, 3: 1, 6: 2, 8: 3, 10: 4 };
+    const inclusionTable: { [key: number]: number } = { 0: 0, 2: 1, 5: 2, 7: 3, 9: 4 };
+    const correspondenceTable: { [key: number]: number } = { 0: 1, 1: 0, 2: 3, 3: 2, 5: 6, 6: 5, 7: 8, 8: 7, 9: 10, 10: 9 };
   
     num += this.octaveKeys * this.octaveTranspose;
     const octave = Math.floor(num / this.octaveKeys);
@@ -441,8 +442,9 @@ export class PianoConverter {
         sheetMusic += notes
     }
 
-    sheetMusic = rstrip(',', sheetMusic)
     sheetMusic = "BPM: " + Math.floor(60000 / mostFrequentDur) + this.endOfLineChar + sheetMusic;
+    sheetMusic = sheetMusic.trim();
+    sheetMusic = rstrip(',', rstrip(',', sheetMusic));
     return sheetMusic.substring(0, Math.min(sheetMusic.length, this.overallImportLimit));
   }
 

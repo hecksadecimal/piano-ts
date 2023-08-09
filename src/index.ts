@@ -1,4 +1,2 @@
-import TrackManager from "./TrackManager";
-import { PianoConverter } from "./PianoConverter";
-
-export default { TrackManager, PianoConverter };
+export { PianoConverter } from './PianoConverter';
+export { TrackManager } from './TrackManager';
